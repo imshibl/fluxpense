@@ -26,6 +26,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
 
   late String selectedCategory;
 
+  //Select Date
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -41,6 +42,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
     }
   }
 
+  //Add expense
   Future<void> _addExpense() async {
     final addExpense = ref.read(addExpenseProvider);
 
@@ -55,7 +57,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
     );
 
     await addExpense(expense).whenComplete(() {
-      //refresh the providers
+      //refresh the providers to update changes data in UI
       ref.refresh(recentExpensesProvider);
       ref.refresh(allExpensesProvider);
       ref.refresh(getOverallExpenseProvider);
@@ -81,6 +83,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
   Widget build(BuildContext context) {
     final categories = ref.read(categoryProvider);
 
+    //update selected category if it is null
     try {
       if (kDebugMode) {
         print(selectedCategory);
@@ -98,12 +101,14 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //Expense Amount Field
             TextField(
               controller: amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(labelText: 'Amount'),
             ),
             SizedBox(height: 16),
+            //Expense Date Field
             InkWell(
               onTap: () => _selectDate(context),
               child: InputDecorator(
@@ -123,6 +128,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
               ),
             ),
             SizedBox(height: 16),
+            //Expense Category Dropdown
             DropdownButtonFormField<String>(
                 value: selectedCategory,
                 items: categories.map((category) {
@@ -150,6 +156,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
                   });
                 }),
             SizedBox(height: 16),
+            //Expense Description Field
             TextField(
               controller: descriptionController,
               decoration: InputDecoration(labelText: 'Description'),
@@ -159,6 +166,7 @@ class _AddExpenseScreenState extends ConsumerState<AddExpenseScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //Add Expense
           _addExpense();
         },
         child: Icon(Icons.check),

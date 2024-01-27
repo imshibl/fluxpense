@@ -12,8 +12,8 @@ class AllExpensesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categories = ref.read(categoryProvider);
-    final expenseTypeFilter = ref.watch(filterAllExpensesProvider);
+    final expenseTypeFilter = ref
+        .watch(filterAllExpensesProvider); //to get expenses based on category
 
     return Scaffold(
       appBar: AppBar(
@@ -24,14 +24,16 @@ class AllExpensesScreen extends ConsumerWidget {
             onPressed: () {},
             icon: Icon(Icons.sort),
           ),
+          //Filter By Category Icon
           IconButton(
             onPressed: () {
+              //Dialog to Select Category to Filter
               showDialog(
                   context: context,
                   builder: (context) {
                     return Consumer(builder: (context, ref, _) {
-                      final expenseCategoryTypeFilter =
-                          ref.watch(filterAllExpensesProvider);
+                      final expenseCategoryTypeFilter = ref.watch(
+                          filterAllExpensesProvider); //to update selected category
                       return AlertDialog(
                         scrollable: true,
                         title: Text('Category Filter'),
@@ -75,7 +77,7 @@ class AllExpensesScreen extends ConsumerWidget {
                 children: [
                   ExpenseList(
                     expenses: expenses,
-                    categories: categories,
+                    categories: ref.read(categoryProvider),
                   ),
                 ],
               );

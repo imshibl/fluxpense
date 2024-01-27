@@ -1,3 +1,4 @@
+//Function to capitalize the first letter of a string
 String capitalizeFirstLetter(String input) {
   if (input.isEmpty) {
     return input; // Return empty string if input is empty

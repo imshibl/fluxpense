@@ -12,6 +12,7 @@ import 'package:fluxpense/presentation/providers/expense_providers/get_overall_e
 import 'package:fluxpense/presentation/providers/expense_providers/get_single_expense_provider.dart';
 import 'package:fluxpense/presentation/providers/expense_providers/recent_expenses_provider.dart';
 
+//View/Edit Expense Screen
 class ViewExpenseScreen extends ConsumerStatefulWidget {
   const ViewExpenseScreen({super.key});
 
@@ -24,8 +25,9 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
   late TextEditingController descriptionController;
   late DateTime selectedDate;
   late String selectedCategory;
-  String newCategory = "";
+  String newCategory = ""; //For updating category
 
+  //Select Date
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -41,6 +43,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
     }
   }
 
+  //Update expense
   Future<void> _updateExpense(
       {required int id, required String category}) async {
     final updateExpense = ref.read(updateSingleExpenseProvider);
@@ -56,7 +59,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
         category: category);
 
     await updateExpense(id, expense).whenComplete(() {
-      //refresh the providers
+      //refresh the providers to update changed data in UI
       ref.refresh(recentExpensesProvider);
       ref.refresh(allExpensesProvider);
       ref.refresh(getOverallExpenseProvider);
@@ -76,13 +79,16 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final expenseId = ModalRoute.of(context)!.settings.arguments as int;
-    final categories = ref.read(categoryProvider);
+    final expenseId = ModalRoute.of(context)!.settings.arguments
+        as int; //get passed expense id from the expense list
+    final categories =
+        ref.read(categoryProvider); //to create category dropdownbutton
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense'),
         actions: [
+          //Delete expense icon
           IconButton(
             onPressed: () {
               final deleteExpense = ref.read(deleteExpenseProvider);
@@ -115,6 +121,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
 
               selectedCategory = expense.category;
 
+              //set selectedDate if it is not null
               try {
                 if (kDebugMode) {
                   print(selectedDate);
@@ -128,6 +135,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    //Expense Amount TextField
                     TextField(
                       controller: amountController,
                       keyboardType:
@@ -135,6 +143,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                       decoration: InputDecoration(labelText: 'Amount'),
                     ),
                     SizedBox(height: 16),
+                    //Expense Date Field
                     InkWell(
                       onTap: () => _selectDate(context),
                       child: InputDecorator(
@@ -154,6 +163,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                       ),
                     ),
                     SizedBox(height: 16),
+                    //Expense Category Dropdown
                     DropdownButtonFormField<String>(
                         value: selectedCategory,
                         items: categories.map((category) {
@@ -182,6 +192,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                           });
                         }),
                     SizedBox(height: 16),
+                    //Expense Description TextField
                     TextField(
                       controller: descriptionController,
                       decoration: InputDecoration(labelText: 'Description'),
@@ -195,8 +206,12 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
             },
             loading: () => const CircularProgressIndicator(),
           ),
+      //users can click this FAB if they want to update their data or else they can go back to the home screen.
+      //even if they click this FAB without any data changes,it will update the data the original data,thus make no changes.
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //Add Expense
+          //only update category if newCategory is not empty
           if (newCategory.isNotEmpty) {
             _updateExpense(id: expenseId, category: newCategory);
           } else {

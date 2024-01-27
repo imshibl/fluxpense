@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 
 class ExpenseList extends StatelessWidget {
   final List<ExpenseEntity> expenses;
-  final List<CategoryModel> categories;
+  final List<CategoryModel>
+      categories; //Get using Expense Category List Provider
 
   const ExpenseList(
       {super.key, required this.expenses, required this.categories});

@@ -20,16 +20,15 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<List<ExpenseEntity>> recentExpenses =
-        ref.watch(recentExpensesProvider);
-    AsyncValue<double> overAllExpenses = ref.watch(getOverallExpenseProvider);
+        ref.watch(recentExpensesProvider); //get recent expenses
+    AsyncValue<double> overAllExpenses = ref.watch(
+        getOverallExpenseProvider); //To get overall expense (number/double)
 
     //CHART DATA PROVIDERS
-    TimeFrameSortType timeFrameSorter = ref.watch(timeFrameSortTypeProvider);
-    AsyncValue<List<ExpenseEntity>> expenseTimeFrame =
-        ref.watch(getExpenseTimeFrameProvider);
-
-    //CATRGORIES
-    final categories = ref.read(categoryProvider);
+    TimeFrameSortType timeFrameSorter =
+        ref.watch(timeFrameSortTypeProvider); //to select time frame
+    AsyncValue<List<ExpenseEntity>> expenseTimeFrame = ref.watch(
+        getExpenseTimeFrameProvider); //to get expense based on selected time frame
 
     return Scaffold(
       appBar: AppBar(title: Text('Fluxpense'), actions: [
@@ -118,7 +117,9 @@ class HomeScreen extends ConsumerWidget {
                 data: (expenses) {
                   if (expenses.isNotEmpty && expenses.length > 1) {
                     return PieChartWidget(
-                        expenses: expenses, categories: categories);
+                      expenses: expenses,
+                      categories: ref.read(categoryProvider),
+                    );
                   } else {
                     return SizedBox();
                   }
@@ -208,7 +209,7 @@ class HomeScreen extends ConsumerWidget {
                   if (recentExpenses.isNotEmpty) {
                     return ExpenseList(
                       expenses: recentExpenses,
-                      categories: categories,
+                      categories: ref.read(categoryProvider),
                     );
                   } else {
                     return Container(

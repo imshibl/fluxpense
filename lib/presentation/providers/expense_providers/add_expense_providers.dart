@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
 import 'package:fluxpense/domain/usecases/expense_use_case.dart';
 
+//Add Expense Provider
 final addExpenseProvider =
     Provider<Future<void> Function(ExpenseEntity)>((ref) {
   final useCase = ref.read(expenseUseCaseProvider);
   return (ExpenseEntity expense) => useCase.addExpense(expense);
 });
 
+//Expense Category Model
 class CategoryModel {
   final String name;
   final Color color;
@@ -16,6 +18,7 @@ class CategoryModel {
   CategoryModel({required this.name, required this.color});
 }
 
+//Expense Category List Provider
 final categoryProvider = StateProvider<List<CategoryModel>>((ref) {
   return [
     CategoryModel(name: 'Food', color: Colors.green),

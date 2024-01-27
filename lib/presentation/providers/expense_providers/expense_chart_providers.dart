@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
 import 'package:fluxpense/domain/usecases/expense_use_case.dart';
 
+//Provider to get expenses based on time frame(weekly, monthly, all time)
 final getExpenseTimeFrameProvider =
     FutureProvider<List<ExpenseEntity>>((ref) async {
   final useCase = ref.read(expenseUseCaseProvider);
@@ -15,13 +16,14 @@ final getExpenseTimeFrameProvider =
   return useCase.getAllExpenses();
 });
 
+//Expense Time Frame Enums
 enum TimeFrameSortType {
   weekly,
   monthly,
   allTime,
 }
 
+//Expense Time Frame Selection Provider
 final timeFrameSortTypeProvider = StateProvider<TimeFrameSortType>(
-  // We return the default sort type, here name.
   (ref) => TimeFrameSortType.weekly,
 );

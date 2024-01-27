@@ -15,6 +15,7 @@ class ExpenseLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //LINE CHART
         Container(
           margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           height: 150,
@@ -48,6 +49,7 @@ class ExpenseLineChart extends StatelessWidget {
                         }))),
           ),
         ),
+        //Show overall expense based on Time Frame(weekly, monthly, all time)
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

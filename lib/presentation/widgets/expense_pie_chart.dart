@@ -8,11 +8,14 @@ import 'package:fluxpense/presentation/providers/expense_providers/add_expense_p
 
 class PieChartWidget extends StatelessWidget {
   final List<ExpenseEntity> expenses;
-  final List<CategoryModel> categories;
+
+  final List<CategoryModel>
+      categories; //Get using Expense Category List Provider
 
   const PieChartWidget(
       {super.key, required this.expenses, required this.categories});
 
+  //Get Expense based on Category
   Map<String, double> getCategoryExpenses(List<ExpenseEntity> expenses) {
     Map<String, double> categoryExpenses = {};
     for (var expense in expenses) {
@@ -23,6 +26,7 @@ class PieChartWidget extends StatelessWidget {
     return categoryExpenses;
   }
 
+  //Get Category Color Based on Category Name
   Color getCategoryColor(String categoryName) {
     for (var category in categories) {
       if (category.name == categoryName) {

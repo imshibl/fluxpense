@@ -31,7 +31,8 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider.notifier);
+    final themeMode =
+        ref.watch(themeModeProvider.notifier); //For updating theme
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fluxpense',

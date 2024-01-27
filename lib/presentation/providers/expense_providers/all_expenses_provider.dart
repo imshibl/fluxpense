@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
 import 'package:fluxpense/domain/usecases/expense_use_case.dart';
 
+//All Expenses/Categorized Expense Provider
 final allExpensesProvider = FutureProvider<List<ExpenseEntity>>((ref) async {
   final useCase = ref.read(expenseUseCaseProvider);
   final allExpenses = await useCase.getAllExpenses();
@@ -21,6 +22,7 @@ final allExpensesProvider = FutureProvider<List<ExpenseEntity>>((ref) async {
   return filteredExpenses;
 });
 
+//Expense Filter Enums
 enum ExpenseFilterType {
   all,
   food,
@@ -35,6 +37,7 @@ enum ExpenseFilterType {
   other,
 }
 
+//Select Filter Provider
 final filterAllExpensesProvider = StateProvider<ExpenseFilterType>((ref) {
   return ExpenseFilterType.all;
 });

@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/data/repositories/expense_repository.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
 
+//Domain layer repository provider
 final iExpenseRepositoryProvider = Provider<IExpenseRepository>((ref) {
+  //data layer repository provider
   final repository = ref.read(expenseRepositoryProvider);
   return IExpenseRepository(repository);
 });
