@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/config/notification/notification.dart';
@@ -14,7 +12,7 @@ class NotificationSettingScreen extends ConsumerStatefulWidget {
 
 class _NotificationSettingScreenState
     extends ConsumerState<NotificationSettingScreen> {
-  TimeOfDay _selectedTime = TimeOfDay(hour: 17, minute: 0);
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 17, minute: 0);
 
   String _formatTimeOfDay(TimeOfDay time) {
     final now = DateTime.now();
@@ -46,19 +44,19 @@ class _NotificationSettingScreenState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Notification'),
+          title: const Text('Notification'),
         ),
         body: Column(
           children: [
             ListTile(
-              title: Text("Daily reminder"),
+              title: const Text("Daily reminder"),
               subtitle: Text(
                   "Remind me to add expenses at ${_formatTimeOfDay(_selectedTime)} ."),
               trailing: IconButton(
                 onPressed: () {
                   _showTimePicker();
                 },
-                icon: Icon(Icons.timer),
+                icon: const Icon(Icons.timer),
               ),
             ),
           ],

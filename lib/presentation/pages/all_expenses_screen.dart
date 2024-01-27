@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/presentation/providers/expense_providers/add_expense_providers.dart';
@@ -17,12 +15,12 @@ class AllExpensesScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text("${capitalizeFirstLetter(expenseTypeFilter.name)} Expenses"),
+        title: Text(
+            "${capitalizeFirstLetter(expenseTypeFilter.name)} Expenses"), //update app bar title based on the category filter applied
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.sort),
+            icon: const Icon(Icons.sort),
           ),
           //Filter By Category Icon
           IconButton(
@@ -36,7 +34,7 @@ class AllExpensesScreen extends ConsumerWidget {
                           filterAllExpensesProvider); //to update selected category
                       return AlertDialog(
                         scrollable: true,
-                        title: Text('Category Filter'),
+                        title: const Text('Category Filter'),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -48,6 +46,7 @@ class AllExpensesScreen extends ConsumerWidget {
                                     ? true
                                     : false,
                                 onChanged: (value) {
+                                  //update the category filter
                                   ref
                                       .read(filterAllExpensesProvider.notifier)
                                       .state = category;
@@ -59,7 +58,7 @@ class AllExpensesScreen extends ConsumerWidget {
                     });
                   });
             },
-            icon: Icon(Icons.filter_alt_outlined),
+            icon: const Icon(Icons.filter_alt_outlined),
           )
         ],
       ),
@@ -71,7 +70,7 @@ class AllExpensesScreen extends ConsumerWidget {
           return allExpensesAsyncValue.when(
             data: (expenses) {
               if (expenses.isEmpty) {
-                return Center(child: Text('No expenses found'));
+                return const Center(child: Text('No expenses found'));
               }
               return ListView(
                 children: [
@@ -82,7 +81,7 @@ class AllExpensesScreen extends ConsumerWidget {
                 ],
               );
             },
-            loading: () => Center(
+            loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
             error: (error, stackTrace) =>

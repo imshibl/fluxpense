@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
@@ -31,13 +29,13 @@ class HomeScreen extends ConsumerWidget {
         getExpenseTimeFrameProvider); //to get expense based on selected time frame
 
     return Scaffold(
-      appBar: AppBar(title: Text('Fluxpense'), actions: [
+      appBar: AppBar(title: const Text('Fluxpense'), actions: [
         IconButton(
           onPressed: () {
             // Navigate to settings screen
             Navigator.of(context).pushNamed('/settings');
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.settings,
           ),
         )
@@ -52,16 +50,16 @@ class HomeScreen extends ConsumerWidget {
                 // SHOW EXPENSE SUMMARY & EXPENSE TIME FRAME
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       'Expense Summary',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     DropdownButton<TimeFrameSortType>(
-                      underline: SizedBox(),
+                      underline: const SizedBox(),
                       value: timeFrameSorter,
                       onChanged: (value) {
                         ref.read(timeFrameSortTypeProvider.notifier).state =
@@ -100,15 +98,15 @@ class HomeScreen extends ConsumerWidget {
                     );
                   } else {
                     return Container(
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                           left: 20, right: 20, top: 10, bottom: 10),
                       height: 150,
                       alignment: Alignment.center,
-                      child: Text('No data available.'),
+                      child: const Text('No data available.'),
                     );
                   }
                 },
-                loading: () => CircularProgressIndicator(),
+                loading: () => const CircularProgressIndicator(),
                 error: (error, stackTrace) =>
                     Text('Error fetching recent expenses: $error'),
               ),
@@ -121,10 +119,10 @@ class HomeScreen extends ConsumerWidget {
                       categories: ref.read(categoryProvider),
                     );
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 },
-                loading: () => CircularProgressIndicator(),
+                loading: () => const CircularProgressIndicator(),
                 error: (error, stackTrace) =>
                     Text('Error fetching recent expenses: $error'),
               ),
@@ -139,7 +137,7 @@ class HomeScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       "Overall Expense: ",
                       style: TextStyle(
                         fontSize: 18,
@@ -150,17 +148,17 @@ class HomeScreen extends ConsumerWidget {
                       data: (expense) {
                         return Text(
                           expense.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
                         );
                       },
                       error: (error, stackTrace) {
-                        return Text("Error");
+                        return const Text("Error");
                       },
                       loading: () {
-                        return Text("Loading");
+                        return const Text("Loading");
                       },
                     ),
                   ],
@@ -168,8 +166,8 @@ class HomeScreen extends ConsumerWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
+          const Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
             child: Divider(),
           ),
           // SHOW RECENT EXPENSE
@@ -180,20 +178,20 @@ class HomeScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       'Recent Transactions',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () {
                         // Navigate to the screen to see all expenses
                         Navigator.pushNamed(context, '/all-expenses');
                       },
-                      child: Text(
+                      child: const Text(
                         'Show all',
                         style: TextStyle(
                           fontSize: 16,
@@ -215,11 +213,11 @@ class HomeScreen extends ConsumerWidget {
                     return Container(
                       height: 100,
                       alignment: Alignment.center,
-                      child: Text('No recent transactions.'),
+                      child: const Text('No recent transactions.'),
                     );
                   }
                 },
-                loading: () => CircularProgressIndicator(),
+                loading: () => const CircularProgressIndicator(),
                 error: (error, stackTrace) =>
                     Text('Error fetching recent expenses: $error'),
               ),
@@ -232,7 +230,7 @@ class HomeScreen extends ConsumerWidget {
           // Navigate to the screen to add a new expense
           Navigator.pushNamed(context, '/add-expense');
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

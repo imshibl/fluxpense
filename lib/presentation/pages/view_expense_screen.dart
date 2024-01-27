@@ -1,4 +1,4 @@
-// ignore_for_file: unused_result, prefer_const_constructors
+// ignore_for_file: unused_result
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +108,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                 Navigator.pop(context);
               });
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
           )
         ],
       ),
@@ -139,15 +139,15 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                     TextField(
                       controller: amountController,
                       keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      decoration: InputDecoration(labelText: 'Amount'),
+                          const TextInputType.numberWithOptions(decimal: true),
+                      decoration: const InputDecoration(labelText: 'Amount'),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     //Expense Date Field
                     InkWell(
                       onTap: () => _selectDate(context),
                       child: InputDecorator(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Date',
                         ),
                         child: Row(
@@ -157,12 +157,12 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                             Text(
                               "${selectedDate.toLocal()}".split(' ')[0],
                             ),
-                            Icon(Icons.calendar_today),
+                            const Icon(Icons.calendar_today),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     //Expense Category Dropdown
                     DropdownButtonFormField<String>(
                         value: selectedCategory,
@@ -174,7 +174,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                                 Container(
                                   width: 20,
                                   height: 20,
-                                  margin: EdgeInsets.only(right: 10),
+                                  margin: const EdgeInsets.only(right: 10),
                                   decoration: BoxDecoration(
                                     color: category.color,
                                     shape: BoxShape.circle,
@@ -191,11 +191,12 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
                             newCategory = selectedCategory;
                           });
                         }),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     //Expense Description TextField
                     TextField(
                       controller: descriptionController,
-                      decoration: InputDecoration(labelText: 'Description'),
+                      decoration:
+                          const InputDecoration(labelText: 'Description'),
                     ),
                   ],
                 ),
@@ -218,7 +219,7 @@ class _AddExpenseScreenState extends ConsumerState<ViewExpenseScreen> {
             _updateExpense(id: expenseId, category: selectedCategory);
           }
         },
-        child: Icon(Icons.check),
+        child: const Icon(Icons.check),
       ),
     );
   }

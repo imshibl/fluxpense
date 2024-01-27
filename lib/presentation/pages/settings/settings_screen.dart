@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluxpense/config/theme/theme_provider.dart';
@@ -9,11 +7,12 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkTheme = ref.watch(isDarkThemeProvider);
+    final isDarkTheme =
+        ref.watch(isDarkThemeProvider); //to switch theme(light/dark)
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -21,22 +20,24 @@ class SettingsScreen extends ConsumerWidget {
         ),
         child: ListView(
           children: [
-            // SHOW THEME/UPDATE THEME SWITCH
+            // SHOW THEME UPDATE SWITCH
             SwitchListTile(
-              title: Text('App Theme'),
+              title: const Text('App Theme'),
               value: isDarkTheme,
               onChanged: (value) {
+                // Update theme
                 ref.read(isDarkThemeProvider.notifier).state = value;
               },
             ),
             // NOTIFICATIONS
             ListTile(
-              title: Text('Notifications'),
-              trailing: Icon(
+              title: const Text('Notifications'),
+              trailing: const Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
               ),
               onTap: () {
+                // Navigate to notification setting
                 Navigator.of(context).pushNamed('/notification-setting');
               },
             ),

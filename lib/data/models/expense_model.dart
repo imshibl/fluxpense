@@ -25,6 +25,7 @@ class ExpenseModel {
     };
   }
 
+  //Mapper to convert/map an ExpenseModel into an ExpenseEntity
   factory ExpenseModel.fromEntity(ExpenseEntity entity) {
     return ExpenseModel(
       id: entity.id,
@@ -32,16 +33,6 @@ class ExpenseModel {
       description: entity.description,
       date: entity.date,
       category: entity.category,
-    );
-  }
-
-  ExpenseEntity toEntity() {
-    return ExpenseEntity(
-      id: id,
-      amount: amount,
-      description: description,
-      date: date,
-      category: category,
     );
   }
 }
