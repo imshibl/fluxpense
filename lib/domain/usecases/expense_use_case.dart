@@ -1,16 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluxpense/data/repositories/expense_repository_impl.dart';
 import 'package:fluxpense/domain/enitity/expense_entity.dart';
 import 'package:fluxpense/domain/repositories/expense_repository.dart';
 
 //Domain layer usecase provider
 final expenseUseCaseProvider = Provider<ExpenseUseCase>((ref) {
-  //domain layer repository provider
-  final repository = ref.read(iExpenseRepositoryProvider);
+  //data layer repository impl provider
+  final repository = ref.read(expenseRepositoryImplProvider);
   return ExpenseUseCase(repository);
 });
 
 class ExpenseUseCase {
-  final IExpenseRepository _repository;
+  final ExpenseRepository _repository;
 
   ExpenseUseCase(this._repository);
 

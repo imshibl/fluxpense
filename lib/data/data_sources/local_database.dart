@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
+//SQLite Database for storing expenses
 class ExpenseDatabase {
   static const _databaseName = 'expense_database1.db';
   static const _databaseVersion = 1;
@@ -41,7 +42,7 @@ class ExpenseDatabase {
   }
 }
 
-// Shared Preferences Provider
+// Shared Preferences Provider (for storing theme mode and notification settings)
 final sharedPreferencesProvider =
     FutureProvider<SharedPreferences>((ref) async {
   return await SharedPreferences.getInstance();
