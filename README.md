@@ -41,6 +41,9 @@ Fluxpense is a simple and user-friendly expense tracker app built with Flutter. 
 
 3. **Code Optimization and Widget Reusing:**
    - Enhance code efficiency and reusability for better performance.
+  
+4. **Better Empty States UI:**
+   - The handling of empty states in the UI can be further improved for a more intuitive and user-friendly experience.
 
 ## Project Setup Guide
 
